@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+ <head>
+   <style>
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+.column {
+  flex: 50%;
+  padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {background-color: greenyellow;}
+
+tr:nth-child(even):hover {background-color: lightblue;}
+
+   </style>
+  <title>Kilofarms</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+ 
+ </head>
+ <body ng-app='myapp'>
+
+  <div ng-controller="userCtrl" > 
+    <br>
+    
+    <p>Keyword Filter on Type: <input type="text" ng-model="test"></p><br>
+<br>
+<div class="row">
+  <div class="column">
+    <p> Main Table</p>
+    <table >
+ 
+      <tr>
+        <th>Roll ID</th>
+        <th>Product Name</th>
+        <th>Product Type</th>
+      </tr>
+  
+      <!-- Display records -->
+      <tr ng-repeat="user in users| filter : test">
+        <td ng-click="filterByMe(user.rollid)" >{{user.rollid}}</td>
+        <td ng-click="filterByMe(user.productname)" >{{user.productname}}</td>
+        <td ng-click="filterByMe(user.dropdownlist)" >{{user.dropdownlist}}</td>
+      </tr>
+ 
+    </table>
+  </div>
+  <div class="column">
+    <p> Click on Main Tables' keys to filter. Your Selected Keyword is:<b><span>{{random}}</span></b> </p>
+    
+    <table class="column">
+ 
+      <tr>
+        <th>Roll ID</th>
+        <th>Product Name</th>
+        <th>Product Type</th>
+      </tr>
+  
+      <!-- Display records -->
+      <tr ng-show="tr" ng-repeat="user in users| filter : customFilter">
+        <td>{{user.rollid}}</td>
+        <td>{{user.productname}}</td>
+        <td>{{user.dropdownlist}}</td>
+      </tr>
+  
+    </table>
+  </div>
+  </div>
+  </div>
+
+  <script>
+    var fetch = angular.module('myapp', []);
+    
+    fetch.controller('userCtrl', ['$scope', '$http', function ($scope, $http) {
+     $http({
+      method: 'get',
+      url: 'getData.php'
+     }).then(function successCallback(response) {
+      // Store response data
+      $scope.users = response.data;
+     });
+     $scope.filterByMe = function(x) {
+    $scope.customFilter = x;
+    $scope.random=x;
+    $scope.tr=true;
+    console.log(x);
+  }
+    }]);
+    
+    </script>
+ </body>
+</html>

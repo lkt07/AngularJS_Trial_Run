@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> 
+<title> Kilofarms </title>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+
+h1{
+  text-align: center;
+
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+  border: 25px;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+
+input[type=text], input[type=password],input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button {
+  
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container2{
+  width: 45%;
+  border: 5px double black;
+  padding: 10px 25px 10px 25px;
+  margin-left: 27.5%;
+  margin-top: 10px;
+}
+
+ p {
+   font-size: 16px;
+   font: Helvetica;
+   background-color: 	#ffffff;
+ }
+</style>
+
+</head>
+<body ng-app="">
+
+ 
+   <div class="container2">
+
+     <h1>Sign-In</h1>
+
+    <div class="imgcontainer">
+     <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar"></br></br>
+    </div>
+
+    <form name="myForm">
+
+      
+      
+      <input type="number" placeholder="Enter your Mobile Number" name="phno" ng-model="phno" ng-maxlength="10" ng-minlength="10">
+      
+      <span ng-if="!myForm.phno.$valid" style="color:red;font-size:10px;">Phone number should be 10 digits long</span>
+      
+
+      <input  type="password" placeholder="Enter Password" name="password" ng-model="password" ng-minlength="8">
+      <span ng-if="!myForm.password.$valid" style="color:red;font-size:10px;">Password should be more than 8 digits long</span>
+      <button type="submit" class="button" ng-disabled="myForm.$invalid||myForm.phno.$pristine||myForm.password.$pristine">LOGIN</button>
+      </form>
+      <a href="http://localhost/AngularJS/homepage.html">Link to Page 2</a>
+
+    </div>
+
+
+</body>
+</html>
+
+
